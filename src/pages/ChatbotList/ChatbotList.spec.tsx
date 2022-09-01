@@ -4,6 +4,7 @@ import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
+import { BrowserRouter } from "react-router-dom";
 
 import { mockBots } from "../../mocks";
 import ChatbotList from ".";
@@ -20,7 +21,7 @@ afterAll(() => server.close());
 
 describe("ChatbotList", () => {
   it("should be renders a chatbots list", async () => {
-    render(<ChatbotList />);
+    render(<ChatbotList />, { wrapper: BrowserRouter });
 
     const chatbotsSection = within(
       await screen.findByRole("region", { name: /chatbots/i })
@@ -31,7 +32,7 @@ describe("ChatbotList", () => {
   });
 
   it("should be add a favorite", async () => {
-    render(<ChatbotList />);
+    render(<ChatbotList />, { wrapper: BrowserRouter });
 
     const chatbotsSection = within(
       await screen.findByRole("region", { name: /chatbots/i })

@@ -1,8 +1,12 @@
 import * as S from "./styles";
 
-const Spinner: React.FC = () => {
+interface SpinnerProps {
+  className?: string;
+}
+
+const Spinner: React.FC<SpinnerProps> = props => {
   return (
-    <S.SpinnerWrapper>
+    <S.SpinnerWrapper {...props}>
       <span />
       <span />
       <span />

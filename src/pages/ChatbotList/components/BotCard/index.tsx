@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 import Card, {
   CardAction,
   CardDescription,
   CardHeader,
-  CardHorizontalContainer,
   CardImage,
+  CardOverlay,
   CardTitle,
 } from "@/components/Card";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -28,20 +30,22 @@ const CardHorizontal: React.FC<CardProps> = ({
   onFavoriteToggle,
   ...props
 }) => (
-  <CardHorizontalContainer as="li" {...props}>
+  <CardOverlay as="li" direction="horizontal" {...props}>
     <CardAction
       active={active}
       position="relative"
       onClick={onFavoriteToggle}
     />
-    <Card direction="horizontal">
-      <CardHeader>
-        <CardImage src="" size="small" />
-        <CardTitle>{bot.name}</CardTitle>
-      </CardHeader>
-      <CardDescription>Created at {bot.created}</CardDescription>
-    </Card>
-  </CardHorizontalContainer>
+    <Link to="/details">
+      <Card direction="horizontal">
+        <CardHeader>
+          <CardImage src={bot.image} size="small" />
+          <CardTitle>{bot.name}</CardTitle>
+        </CardHeader>
+        <CardDescription>Created at {bot.created}</CardDescription>
+      </Card>
+    </Link>
+  </CardOverlay>
 );
 
 const CardVertical: React.FC<CardProps> = ({
@@ -50,17 +54,19 @@ const CardVertical: React.FC<CardProps> = ({
   onFavoriteToggle,
   ...props
 }) => (
-  <Card direction="vertical" as="li" {...props}>
+  <CardOverlay as="li">
     <CardAction active={active} onClick={onFavoriteToggle} />
-    <CardImage className="mb-16" src="" />
-    <CardTitle>{bot.name}</CardTitle>
-    <CardDescription>{bot.type}</CardDescription>
-  </Card>
+    <Link to="/details">
+      <Card direction="vertical" {...props}>
+        <CardImage className="mb-16" src={bot.image} />
+        <CardTitle>{bot.name}</CardTitle>
+        <CardDescription>{bot.type}</CardDescription>
+      </Card>
+    </Link>
+  </CardOverlay>
 );
 
-interface BotCardProps {
-  bot: Bot;
-}
+type BotCardProps = { bot: Bot };
 
 const BotCard: React.FC<BotCardProps> = props => {
   const { view } = useView();

@@ -7,20 +7,42 @@ import * as S from "./styles";
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   direction?: "horizontal" | "vertical";
-  as?: React.ElementType;
 }
 
 const Card: React.FC<CardProps> = ({
   children,
   direction = "vertical",
-  as: asProp = "div",
+  ...props
 }) => {
   return (
-    <S.CardWrapper className={cc(`card--${direction}`)} as={asProp}>
+    <S.CardWrapper
+      className={cc(`card--${direction}`, props.className)}
+      {...props}
+    >
       {children}
     </S.CardWrapper>
   );
 };
+
+interface CardOrverlayProps extends React.HTMLAttributes<HTMLDivElement> {
+  direction?: "horizontal" | "vertical";
+  as?: React.ElementType;
+}
+
+export const CardOverlay: React.FC<CardOrverlayProps> = ({
+  children,
+  direction = "vertical",
+  as: asProp = "div",
+  ...props
+}) => (
+  <S.CardOverlay
+    className={cc(`card__orverlay--${direction}`, props.className)}
+    as={asProp}
+    {...props}
+  >
+    {children}
+  </S.CardOverlay>
+);
 
 interface CardActionProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -48,11 +70,5 @@ export const CardAction: React.FC<CardActionProps> = ({
   );
 };
 
-export {
-  CardDescription,
-  CardHeader,
-  CardHorizontalContainer,
-  CardImage,
-  CardTitle,
-} from "./styles";
+export { CardDescription, CardHeader, CardImage, CardTitle } from "./styles";
 export default Card;

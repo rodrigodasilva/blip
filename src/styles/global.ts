@@ -54,6 +54,11 @@ const GlobalStyles = createGlobalStyle`
     overflow-wrap: break-word;
   }
 
+  a {
+    width: 100%;
+    text-decoration: none;
+  }
+
   #root {
     isolation: isolate;
     height: 100%;
@@ -80,6 +85,7 @@ const GlobalStyles = createGlobalStyle`
 
   .my-40 { margin: 40px 0; }
   .mb-16 { margin-bottom: 16px; }
+  .mx-auto { margin: 0 auto; }
 `;
 
 export default GlobalStyles;

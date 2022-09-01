@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 import Avatar from "@/components/Avatar";
 
-export const CardWrapper = styled.div.attrs<{ as: string }>(props => ({
-  as: props.as,
-}))`
+export const CardWrapper = styled.div`
   background: #ffffff;
   box-shadow: 0px 2px 12px rgba(96, 123, 153, 0.15);
   border-radius: 7px;
@@ -30,22 +28,25 @@ export const CardWrapper = styled.div.attrs<{ as: string }>(props => ({
   }
 `;
 
+export const CardOverlay = styled.div.attrs<{ as: string }>(props => ({
+  as: props.as,
+}))`
+  list-style: none;
+  position: relative;
+
+  &.card__orverlay--horizontal {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    list-style: none;
+  }
+`;
+
 export const CardHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-`;
-
-export const CardHorizontalContainer = styled.div.attrs<{ as: string }>(
-  props => ({
-    as: props.as || "div",
-  })
-)`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-  list-style: none;
 `;
 
 export const CardAction = styled.button`
@@ -53,6 +54,7 @@ export const CardAction = styled.button`
   background: none;
   border: none;
   padding: 0;
+  z-index: 2;
 
   img {
     width: 23px;
