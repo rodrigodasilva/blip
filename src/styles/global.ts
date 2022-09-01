@@ -62,12 +62,24 @@ const GlobalStyles = createGlobalStyle`
   :root {
     --primary-ghost: #F5F8F9;
     --primary-main-blip: #2CC3D5;
+    --secondary-true: #4DCB7B;
     --neutral-onix: #1A2437;
     --neutral-city: #56616E;        
     --neutral-wave: #D2DFE6;  
     --neutral-desk: #607B99;
     --neutral-rooftop: #738192;
-  }  
+    --extended-smurf: #55CFFF;
+    --extended-petroleum: #2A6880;
+    --extended-carrot: #FA7E25;
+    --extended-watermelon: #F66689;
+    --extended-melon: #F1E733;
+    --extended-grape: #B766F6;
+    --extended-sea: #517BF2;
+
+  }
+
+  .my-40 { margin: 40px 0; }
+  .mb-16 { margin-bottom: 16px; }
 `;
 
 export default GlobalStyles;
