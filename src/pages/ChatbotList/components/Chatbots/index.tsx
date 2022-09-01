@@ -1,11 +1,6 @@
-import Card, {
-  CardAction,
-  CardDescription,
-  CardImage,
-  CardTitle,
-} from "@/components/Card";
 import Spinner from "@/components/Spinner";
 
+import BotCard from "../BotCard";
 import * as S from "./styles";
 
 interface Bot {
@@ -46,14 +41,7 @@ const Chatbots: React.FC<ChatbotsProps> = ({ bots, loading, error }) => {
     <section aria-label="Chatbots">
       <S.ChatbotsList>
         {bots.map(bot => (
-          <li key={bot.name}>
-            <Card>
-              <CardAction />
-              <CardImage src={bot.image} alt={bot.name} />
-              <CardTitle>{bot.name}</CardTitle>
-              <CardDescription>{bot.type}</CardDescription>
-            </Card>
-          </li>
+          <BotCard key={bot.name} bot={bot} />
         ))}
       </S.ChatbotsList>
     </section>
