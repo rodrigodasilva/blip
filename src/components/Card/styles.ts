@@ -1,33 +1,75 @@
 import styled from "styled-components";
 
-export const CardWrapper = styled.div`
+import Avatar from "@/components/Avatar";
+
+export const CardWrapper = styled.div.attrs<{ as: string }>(props => ({
+  as: props.as,
+}))`
   background: #ffffff;
   box-shadow: 0px 2px 12px rgba(96, 123, 153, 0.15);
   border-radius: 7px;
-  width: 188px;
-  height: 192px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  align-items: center;
+  list-style: none;
+
+  &.card--vertical {
+    width: 188px;
+    height: 192px;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &.card--horizontal {
+    flex-direction: row;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
+    padding: 16px 24px;
+    width: 100%;
+  }
+`;
+
+export const CardHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+export const CardHorizontalContainer = styled.div.attrs<{ as: string }>(
+  props => ({
+    as: props.as || "div",
+  })
+)`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  list-style: none;
 `;
 
 export const CardAction = styled.button`
   cursor: pointer;
   background: none;
   border: none;
-  position: absolute;
-  top: 12px;
-  left: 12px;
+  padding: 0;
 
   img {
     width: 23px;
   }
+
+  &.card__action--absolute {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
+
+  &.card__action--relative {
+    position: relative;
+  }
 `;
 
-export const CardImage = styled.img`
-  margin-bottom: 16px;
+export const CardImage = styled(Avatar)`
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -40,6 +82,11 @@ export const CardTitle = styled.h4`
   font-size: 16px;
   line-height: 22px;
   text-align: center;
+  word-break: break-word;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const CardDescription = styled.p`
@@ -49,4 +96,9 @@ export const CardDescription = styled.p`
   font-size: 12px;
   line-height: 22px;
   text-align: center;
+  word-break: break-word;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

@@ -21,4 +21,8 @@ export const ButtonWrapper = styled.button`
     background-color: transparent;
     color: var(--neutral-city);
   }
+
+  &.button--active {
+    opacity: 0.8;
+  }
 `;

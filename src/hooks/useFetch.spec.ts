@@ -4,7 +4,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
-import { mockBots } from "./mocks";
+import { mockBots } from "../mocks";
 import useFetch from "./useFetch";
 
 const server = setupServer(

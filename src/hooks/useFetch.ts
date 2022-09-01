@@ -19,7 +19,6 @@ function useFetch<T = unknown>(
 
   useEffect(() => {
     if (!url) return;
-
     cancelRequest.current = false;
 
     const fetchData = async () => {

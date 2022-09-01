@@ -42,9 +42,9 @@ module.exports = {
     // Handle CSS imports (without CSS modules)
     "^.+\\.(css|sass|scss|less)$": "<rootDir>/__mocks__/styleMock.js",
 
-    // Handle static assets
-    // https://jestjs.io/docs/webpack#handling-static-assets
-    "^.+\\.(jpg|jpeg|png|gif|webp|avif|svg|ttf|woff|woff2)$": `<rootDir>/__mocks__/fileMock.js`,
+    // Handle static assets        
+    "\\.(jpg|jpeg|png|svg)$": "jest-transform-stub",
+    
 
     // Handle TypeScript path aliases
     "^@/(.*)$": "<rootDir>/src/$1",
