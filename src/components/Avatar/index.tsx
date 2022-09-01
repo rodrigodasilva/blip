@@ -19,7 +19,6 @@ const colors = [
   "var(--extended-grape)",
   "var(--extended-sea)",
 ];
-const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
 
 const Avatar: React.FC<AvatarProps> = ({
   src = "",
@@ -38,7 +37,9 @@ const Avatar: React.FC<AvatarProps> = ({
     [children] = alt;
   }
 
-  const backgroundColor = getRandomColor();
+  const backgroundColor = React.useMemo(() => {
+    return colors[Math.floor(Math.random() * colors.length)];
+  }, []);
 
   return (
     <S.AvatarWrapper

@@ -6,6 +6,7 @@ import Card, {
   CardImage,
   CardTitle,
 } from "@/components/Card";
+import { useFavorites } from "@/hooks/useFavorites";
 import useView from "@/hooks/useView";
 
 interface Bot {
@@ -17,11 +18,22 @@ interface Bot {
 
 interface CardProps {
   bot: Bot;
+  onFavoriteToggle: () => void;
+  active: boolean;
 }
 
-const CardHorizontal: React.FC<CardProps> = ({ bot, ...props }) => (
+const CardHorizontal: React.FC<CardProps> = ({
+  bot,
+  active,
+  onFavoriteToggle,
+  ...props
+}) => (
   <CardHorizontalContainer as="li" {...props}>
-    <CardAction active={false} position="relative" />
+    <CardAction
+      active={active}
+      position="relative"
+      onClick={onFavoriteToggle}
+    />
     <Card direction="horizontal">
       <CardHeader>
         <CardImage src="" size="small" />
@@ -32,9 +44,14 @@ const CardHorizontal: React.FC<CardProps> = ({ bot, ...props }) => (
   </CardHorizontalContainer>
 );
 
-const CardVertical: React.FC<CardProps> = ({ bot, ...props }) => (
+const CardVertical: React.FC<CardProps> = ({
+  bot,
+  active,
+  onFavoriteToggle,
+  ...props
+}) => (
   <Card direction="vertical" as="li" {...props}>
-    <CardAction active={false} />
+    <CardAction active={active} onClick={onFavoriteToggle} />
     <CardImage className="mb-16" src="" />
     <CardTitle>{bot.name}</CardTitle>
     <CardDescription>{bot.type}</CardDescription>
@@ -47,10 +64,35 @@ interface BotCardProps {
 
 const BotCard: React.FC<BotCardProps> = props => {
   const { view } = useView();
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
-  if (view === "list") return <CardHorizontal {...props} />;
+  const active = isFavorite(props.bot.name);
 
-  return <CardVertical {...props} />;
+  const handleFavoriteToggle = () => {
+    if (active) {
+      removeFavorite(props.bot.name);
+      return;
+    }
+
+    addFavorite(props.bot);
+  };
+
+  if (view === "list")
+    return (
+      <CardHorizontal
+        active={active}
+        onFavoriteToggle={handleFavoriteToggle}
+        {...props}
+      />
+    );
+
+  return (
+    <CardVertical
+      active={active}
+      onFavoriteToggle={handleFavoriteToggle}
+      {...props}
+    />
+  );
 };
 
 export default BotCard;

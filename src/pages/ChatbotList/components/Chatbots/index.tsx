@@ -1,6 +1,7 @@
 import Spinner from "@/components/Spinner";
 
 import BotCard from "../BotCard";
+import Message from "../Message";
 import * as S from "./styles";
 
 interface Bot {
@@ -19,22 +20,18 @@ interface ChatbotsProps {
 const Chatbots: React.FC<ChatbotsProps> = ({ bots, loading, error }) => {
   if (loading) {
     return (
-      <S.ChabotsListMessage>
+      <Message>
         <Spinner />
-      </S.ChabotsListMessage>
+      </Message>
     );
   }
 
   if (error) {
-    return (
-      <S.ChabotsListMessage>
-        There was an error loading the bots
-      </S.ChabotsListMessage>
-    );
+    return <Message>There was an error loading the bots</Message>;
   }
 
   if (!bots?.length) {
-    return <S.ChabotsListMessage>No bots found</S.ChabotsListMessage>;
+    return <Message>No bots found</Message>;
   }
 
   return (

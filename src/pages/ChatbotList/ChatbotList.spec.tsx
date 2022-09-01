@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom";
 
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
@@ -18,7 +19,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 describe("ChatbotList", () => {
-  it("should renders chatbots list", async () => {
+  it("should be renders a chatbots list", async () => {
     render(<ChatbotList />);
 
     const chatbotsSection = within(
@@ -27,5 +28,24 @@ describe("ChatbotList", () => {
 
     expect(chatbotsSection.getByText(/Billy Hargrove/i)).toBeInTheDocument();
     expect(chatbotsSection.getByText(/Suzie/i)).toBeInTheDocument();
+  });
+
+  it("should be add a favorite", async () => {
+    render(<ChatbotList />);
+
+    const chatbotsSection = within(
+      await screen.findByRole("region", { name: /chatbots/i })
+    );
+    const [buttonStar] = chatbotsSection.getAllByRole("button", {
+      name: /icon star/i,
+    });
+    userEvent.click(buttonStar);
+    const favoritesSection = within(
+      await screen.findByRole("region", { name: /favorites/i })
+    );
+
+    await waitFor(() => {
+      expect(favoritesSection.getByText(/Billy Hargrove/i)).toBeInTheDocument();
+    });
   });
 });

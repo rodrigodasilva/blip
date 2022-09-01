@@ -40,7 +40,7 @@ export const CardAction: React.FC<CardActionProps> = ({
       {...rest}
     >
       {active ? (
-        <img src={iconStar} alt="Icon start" />
+        <img src={iconStar} alt="Icon star" />
       ) : (
         <img src={iconStarOutline} alt="Icon start outline" />
       )}

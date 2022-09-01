@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Divider from "@/components/Divider";
 import Typography from "@/components/Typography";
+import { FavoritesProvider } from "@/hooks/useFavorites";
 import useFetch from "@/hooks/useFetch";
 import { ViewProvider } from "@/hooks/useView";
 import DefaultLayout from "@/layouts/Default";
@@ -56,10 +57,12 @@ const ChabotList: React.FC = () => {
   );
 };
 
-const ChabotListWithViewProvider = () => (
-  <ViewProvider>
-    <ChabotList />
-  </ViewProvider>
+const ChabotListWithProvides = () => (
+  <FavoritesProvider>
+    <ViewProvider>
+      <ChabotList />
+    </ViewProvider>
+  </FavoritesProvider>
 );
 
-export default ChabotListWithViewProvider;
+export default ChabotListWithProvides;
