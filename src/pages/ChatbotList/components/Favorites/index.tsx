@@ -1,5 +1,3 @@
-import { useAutoAnimate } from "@formkit/auto-animate/react";
-
 import Typography from "@/components/Typography";
 import { useFavorites } from "@/hooks/useFavorites";
 
@@ -9,14 +7,13 @@ import Message from "../Message";
 
 const Favorites: React.FC = () => {
   const { favorites } = useFavorites();
-  const [parent] = useAutoAnimate<HTMLUListElement>({ duration: 200 });
 
   return (
     <section aria-label="Favorites">
       <Typography variant="h1-bold" color="neutral-desk" className="mb-16">
         Favorites
       </Typography>
-      <CardListWrapper ref={parent}>
+      <CardListWrapper>
         {favorites?.length ? (
           favorites.map(favorite => (
             <li key={favorite.name} className="grid-item">
