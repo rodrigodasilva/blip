@@ -38,8 +38,10 @@ const Avatar: React.FC<AvatarProps> = ({
   }
 
   const backgroundColor = React.useMemo(() => {
-    return colors[Math.floor(Math.random() * colors.length)];
-  }, []);
+    return src && loaded !== "error"
+      ? "none"
+      : colors[Math.floor(Math.random() * colors.length)];
+  }, [loaded, src]);
 
   return (
     <S.AvatarWrapper

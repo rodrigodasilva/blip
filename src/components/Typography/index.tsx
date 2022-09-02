@@ -2,7 +2,16 @@ import React from "react";
 
 import * as S from "./styles";
 
-type Variants = "h1-normal" | "h1-bold" | "h1-extra";
+type Variants =
+  | "h1-normal"
+  | "h1-bold"
+  | "h1-extra"
+  | "h2-bold"
+  | "subtitle1-normal"
+  | "subtitle1-bold"
+  | "subtitle2-normal"
+  | "subtitle2-bold"
+  | "body-normal";
 
 interface TypographyProps extends React.HTMLAttributes<HTMLDivElement> {
   align?: "center" | "inherit" | "justify" | "left" | "right";
@@ -19,11 +28,17 @@ export const variantMapping = {
   "h1-extra": "h1",
   "h1-bold": "h1",
   "h1-normal": "h1",
+  "h2-bold": "h2",
+  "subtitle1-normal": "span",
+  "subtitle1-bold": "span",
+  "subtitle2-normal": "span",
+  "subtitle2-bold": "span",
+  "body-normal": "span",
 };
 
 const Typography: React.FC<TypographyProps> = ({
   align = "left",
-  as: asProp = "h1",
+  as: asProp,
   color = "neutral-city",
   className = "",
   children,

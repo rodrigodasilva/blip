@@ -55,7 +55,6 @@ const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    width: 100%;
     text-decoration: none;
   }
 
@@ -72,6 +71,7 @@ const GlobalStyles = createGlobalStyle`
     --neutral-city: #56616E;        
     --neutral-wave: #D2DFE6;  
     --neutral-desk: #607B99;
+    --neutral-cloud: #8CA0B3;
     --neutral-rooftop: #738192;
     --extended-smurf: #55CFFF;
     --extended-petroleum: #2A6880;
@@ -85,7 +85,34 @@ const GlobalStyles = createGlobalStyle`
 
   .my-40 { margin: 40px 0; }
   .mb-16 { margin-bottom: 16px; }
+  .mb-8 { margin-bottom: 8px; }
+  .mr-8 { margin-right: 8px; }
   .mx-auto { margin: 0 auto; }
+
+  .block {display: block; }
+  .flex	{ display: flex; }
+
+  .flex-row	{ flex-direction: row; }
+  .flex-col	{ flex-direction: column; }
+
+  .flex-wrap { flex-wrap: wrap; }
+
+  .content-center	{ align-content: center; }
+  .content-start	{ align-content: flex-start; }
+  .content-end	{ align-content: flex-end; }
+
+  .justify-start	{ justify-content: flex-start; }
+  .justify-end	{ justify-content: flex-end; }  
+  .justify-center	{ justify-content: center; }
+  .justify-between	{ justify-content: space-between; }
+
+  .items-start	{ align-items: flex-start; }
+  .items-end	{ align-items: flex-end; }
+
+  .items-center	{ align-items: center; }  
+  .self-center	{ align-self: center; }
+
+  .w-full	{ width: 100%; }
 `;
 
 export default GlobalStyles;

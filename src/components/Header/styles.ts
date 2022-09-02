@@ -7,4 +7,5 @@ export const HeaderWrapper = styled.header`
   height: 44px;
   justify-content: center;
   width: 100%;
+  padding: 12px;
 `;

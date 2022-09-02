@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import Card, {
   CardAction,
   CardDescription,
-  CardHeader,
   CardImage,
   CardOverlay,
   CardTitle,
 } from "@/components/Card";
 import { useFavorites } from "@/hooks/useFavorites";
 import useView from "@/hooks/useView";
+import parseShortName from "@/utils/parseShortName";
 
 interface Bot {
   name: string;
@@ -22,26 +22,28 @@ interface CardProps {
   bot: Bot;
   onFavoriteToggle: () => void;
   active: boolean;
+  shortName: string;
 }
 
 const CardHorizontal: React.FC<CardProps> = ({
   bot,
   active,
   onFavoriteToggle,
+  shortName,
   ...props
 }) => (
-  <CardOverlay as="li" direction="horizontal" {...props}>
+  <CardOverlay direction="horizontal" {...props}>
     <CardAction
       active={active}
       position="relative"
       onClick={onFavoriteToggle}
     />
-    <Link to="/details">
-      <Card direction="horizontal">
-        <CardHeader>
-          <CardImage src={bot.image} size="small" />
+    <Link to={`/${shortName}/details`} className="w-full">
+      <Card className="flex justify-between items-center flex-wrap ">
+        <div className="flex items-center">
+          <CardImage src={bot.image} size="small" className="mr-8" />
           <CardTitle>{bot.name}</CardTitle>
-        </CardHeader>
+        </div>
         <CardDescription>Created at {bot.created}</CardDescription>
       </Card>
     </Link>
@@ -52,12 +54,13 @@ const CardVertical: React.FC<CardProps> = ({
   bot,
   active,
   onFavoriteToggle,
+  shortName,
   ...props
 }) => (
-  <CardOverlay as="li">
+  <CardOverlay>
     <CardAction active={active} onClick={onFavoriteToggle} />
-    <Link to="/details">
-      <Card direction="vertical" {...props}>
+    <Link to={`/${shortName}/details`}>
+      <Card className="flex-col items-center" {...props}>
         <CardImage className="mb-16" src={bot.image} />
         <CardTitle>{bot.name}</CardTitle>
         <CardDescription>{bot.type}</CardDescription>
@@ -72,7 +75,10 @@ const BotCard: React.FC<BotCardProps> = props => {
   const { view } = useView();
   const { addFavorite, removeFavorite, isFavorite } = useFavorites();
 
-  const active = isFavorite(props.bot.name);
+  const botName = props.bot.name;
+
+  const active = isFavorite(botName);
+  const shortName = parseShortName(botName);
 
   const handleFavoriteToggle = () => {
     if (active) {
@@ -87,6 +93,7 @@ const BotCard: React.FC<BotCardProps> = props => {
     return (
       <CardHorizontal
         active={active}
+        shortName={shortName}
         onFavoriteToggle={handleFavoriteToggle}
         {...props}
       />
@@ -95,6 +102,7 @@ const BotCard: React.FC<BotCardProps> = props => {
   return (
     <CardVertical
       active={active}
+      shortName={shortName}
       onFavoriteToggle={handleFavoriteToggle}
       {...props}
     />

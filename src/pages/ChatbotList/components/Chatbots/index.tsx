@@ -1,8 +1,8 @@
 import Spinner from "@/components/Spinner";
 
 import BotCard from "../BotCard";
+import CardListWrapper from "../CardListWrapper";
 import Message from "../Message";
-import * as S from "./styles";
 
 interface Bot {
   name: string;
@@ -36,11 +36,13 @@ const Chatbots: React.FC<ChatbotsProps> = ({ bots, loading, error }) => {
 
   return (
     <section aria-label="Chatbots">
-      <S.ChatbotsList>
+      <CardListWrapper>
         {bots.map(bot => (
-          <BotCard key={bot.name} bot={bot} />
+          <li key={bot.name} className="grid-item">
+            <BotCard bot={bot} />
+          </li>
         ))}
-      </S.ChatbotsList>
+      </CardListWrapper>
     </section>
   );
 };

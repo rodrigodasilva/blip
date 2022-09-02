@@ -5,7 +5,6 @@ import Typography from "@/components/Typography";
 import { FavoritesProvider } from "@/hooks/useFavorites";
 import useFetch from "@/hooks/useFetch";
 import { ViewProvider } from "@/hooks/useView";
-import DefaultLayout from "@/layouts/Default";
 
 import Chatbots from "./components/Chatbots";
 import Favorites from "./components/Favorites";
@@ -45,7 +44,7 @@ const ChabotList: React.FC = () => {
   };
 
   return (
-    <DefaultLayout>
+    <>
       <S.ChatbotListHeader>
         <Typography variant="h1-extra">My chatbots</Typography>
         <Filters filters={filters} onFilterChange={handleFilterChange} />
@@ -53,7 +52,7 @@ const ChabotList: React.FC = () => {
       <Favorites />
       <Divider className="my-40" />
       <Chatbots bots={bots} loading={loading} error={!!error} />
-    </DefaultLayout>
+    </>
   );
 };
 

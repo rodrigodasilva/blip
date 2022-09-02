@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import logoImage from "@/assets/logo.png";
 import Header from "@/components/Header";
 
@@ -9,9 +11,13 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({ children }) => {
   return (
     <S.DefaultLayoutWrapper>
       <Header>
-        <img alt="Blip logo" src={logoImage} />
+        <Link to="/">
+          <img alt="Blip logo" src={logoImage} />
+        </Link>
       </Header>
-      <S.DefaultLayoutContent>{children}</S.DefaultLayoutContent>
+      <S.DefaultLayoutContent>
+        <S.DefaultLayoutChildren>{children}</S.DefaultLayoutChildren>
+      </S.DefaultLayoutContent>
     </S.DefaultLayoutWrapper>
   );
 };

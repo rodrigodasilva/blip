@@ -6,19 +6,12 @@ import iconStarOutline from "@/assets/icons/icon-star-outline.png";
 import * as S from "./styles";
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  direction?: "horizontal" | "vertical";
+  height?: string;
 }
 
-const Card: React.FC<CardProps> = ({
-  children,
-  direction = "vertical",
-  ...props
-}) => {
+const Card: React.FC<CardProps> = ({ children, height, ...props }) => {
   return (
-    <S.CardWrapper
-      className={cc(`card--${direction}`, props.className)}
-      {...props}
-    >
+    <S.CardWrapper className={cc(props.className)} height={height} {...props}>
       {children}
     </S.CardWrapper>
   );
@@ -70,5 +63,5 @@ export const CardAction: React.FC<CardActionProps> = ({
   );
 };
 
-export { CardDescription, CardHeader, CardImage, CardTitle } from "./styles";
+export { CardDescription, CardImage, CardTitle } from "./styles";
 export default Card;

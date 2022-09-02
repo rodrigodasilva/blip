@@ -11,6 +11,11 @@ export const DefaultLayoutWrapper = styled.div`
 export const DefaultLayoutContent = styled.main`
   background-color: var(--primary-ghost);
   height: 100%;
-  padding: 40px 60px;
+  padding: 32px 60px;
   overflow-y: auto;
+`;
+
+export const DefaultLayoutChildren = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
 `;

@@ -1,31 +1,22 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Avatar from "@/components/Avatar";
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.div<{ height: string | undefined }>`
   background: #ffffff;
   box-shadow: 0px 2px 12px rgba(96, 123, 153, 0.15);
   border-radius: 7px;
   display: flex;
   position: relative;
-  align-items: center;
   list-style: none;
+  padding: 16px 24px;
+  width: 100%;
 
-  &.card--vertical {
-    width: 188px;
-    height: 192px;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  &.card--horizontal {
-    flex-direction: row;
-    justify-content: space-between;
-    height: 60px;
-    width: 100%;
-    padding: 16px 24px;
-    width: 100%;
-  }
+  ${props =>
+    props.height &&
+    css`
+      height: ${props.height};
+    `}
 `;
 
 export const CardOverlay = styled.div.attrs<{ as: string }>(props => ({
@@ -41,12 +32,6 @@ export const CardOverlay = styled.div.attrs<{ as: string }>(props => ({
     width: 100%;
     list-style: none;
   }
-`;
-
-export const CardHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
 `;
 
 export const CardAction = styled.button`
