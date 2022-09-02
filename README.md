@@ -1,6 +1,4 @@
-# React TypeScript template with Vite
-
-This is a [React](https://reactjs.org) + [TypeScript](https://www.typescriptlang.org/) boilerplate built with [Vite](https://vitejs.dev).
+# Blip challenge
 
 ## What's inside?
 
@@ -9,10 +7,8 @@ This is a [React](https://reactjs.org) + [TypeScript](https://www.typescriptlang
 - [TypeScript](https://www.typescriptlang.org)
 - [Jest](https://jestjs.io)
 - [Testing Library](https://testing-library.com)
-- [Cypress](https://www.cypress.io)
 - [ESLint](https://eslint.org)
 - [Prettier](https://prettier.io)
-- [Polyfills](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy#readme)
 
 ## Getting started
 
@@ -73,10 +69,6 @@ npm run serve
 - Run unit tests with coverage
   ```bash
   npm run test:unit:coverage
-  ```
-- Run e2e tests
-  ```bash
-  npm run test:e2e
   ```
 
 ## License
