@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import Divider from "@/components/Divider";
 import Typography from "@/components/Typography";
@@ -15,6 +15,7 @@ export interface Filter {
   orderBy: "name" | "created";
   skip: number;
   take: number;
+  name: string;
 }
 
 interface Bot {
@@ -29,6 +30,7 @@ const ChabotList: React.FC = () => {
     orderBy: "name",
     skip: 0,
     take: 20,
+    name: "",
   });
 
   const {
@@ -43,6 +45,15 @@ const ChabotList: React.FC = () => {
     setFilters(prevState => ({ ...prevState, [name]: value }));
   };
 
+  const filteredChatbots = useMemo(() => {
+    if (!filters.name) return bots;
+    if (!bots?.length) return [];
+
+    return bots.filter(bot =>
+      bot.name?.trim().toLowerCase().includes(filters.name.trim().toLowerCase())
+    );
+  }, [bots, filters.name]);
+
   return (
     <>
       <S.ChatbotListHeader>
@@ -51,7 +62,7 @@ const ChabotList: React.FC = () => {
       </S.ChatbotListHeader>
       <Favorites />
       <Divider className="my-40" />
-      <Chatbots bots={bots} loading={loading} error={!!error} />
+      <Chatbots bots={filteredChatbots} loading={loading} error={!!error} />
     </>
   );
 };

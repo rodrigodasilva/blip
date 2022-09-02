@@ -31,7 +31,7 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFilterChange }) => {
       <Input
         placeholder="Search"
         aria-label="name"
-        name="search"
+        name="name"
         onChange={handleInputChange}
       />
       <Button

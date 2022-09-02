@@ -6,4 +6,5 @@ export const ChatbotListHeader = styled.section`
   justify-content: space-between;
   flex-wrap: wrap;
   margin-bottom: 32px;
+  gap: 12px;
 `;
