@@ -31,24 +31,31 @@ const CardHorizontal: React.FC<CardProps> = ({
   onFavoriteToggle,
   shortName,
   ...props
-}) => (
-  <CardOverlay direction="horizontal" {...props}>
-    <CardAction
-      active={active}
-      position="relative"
-      onClick={onFavoriteToggle}
-    />
-    <Link to={`/${shortName}/details`} className="w-full">
-      <Card className="flex justify-between items-center flex-wrap ">
-        <div className="flex items-center">
-          <CardImage src={bot.image} size="small" className="mr-8" />
-          <CardTitle>{bot.name}</CardTitle>
-        </div>
-        <CardDescription>Created at {bot.created}</CardDescription>
-      </Card>
-    </Link>
-  </CardOverlay>
-);
+}) => {
+  const formattedDate = new Date(bot?.created).toLocaleString("pt-BR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  return (
+    <CardOverlay direction="horizontal" {...props}>
+      <CardAction
+        active={active}
+        position="relative"
+        onClick={onFavoriteToggle}
+      />
+      <Link to={`/${shortName}/details`} className="w-full">
+        <Card className="flex justify-between items-center flex-wrap ">
+          <div className="flex items-center">
+            <CardImage src={bot.image} size="small" className="mr-8" />
+            <CardTitle>{bot.name}</CardTitle>
+          </div>
+          <CardDescription>Created at {formattedDate}</CardDescription>
+        </Card>
+      </Link>
+    </CardOverlay>
+  );
+};
 
 const CardVertical: React.FC<CardProps> = ({
   bot,

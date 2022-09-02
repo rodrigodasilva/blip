@@ -59,6 +59,12 @@ const ChatbotDetails: React.FC = () => {
     return <S.Message>No bots found</S.Message>;
   }
 
+  const formattedDate = new Date(bot?.created).toLocaleString("pt-BR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
   return (
     <>
       <S.ChatbotDetailsHeader>
@@ -72,7 +78,7 @@ const ChatbotDetails: React.FC = () => {
           </div>
         </S.ChatbotDetailsHeaderLeft>
         <Typography variant="subtitle1-normal" color="neutral-cloud">
-          Created at {bot.created}
+          Created at {formattedDate}
         </Typography>
       </S.ChatbotDetailsHeader>
       <Divider />
