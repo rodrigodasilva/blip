@@ -3,46 +3,41 @@ import iconOrganizeList from "@/assets/icons/icon-organize-list.png";
 import Button from "@/components/Button";
 import IconButton from "@/components/IconButton  ";
 import Input from "@/components/Input";
+import useFilters from "@/hooks/useFilters";
 import useView from "@/hooks/useView";
 
-import { Filter } from "../..";
 import * as S from "./styles";
 
-export interface FilterChangeEvent {
-  name: string;
-  value: string | number;
-}
+const Filters: React.FC = () => {
+  const { view, onViewChange } = useView();
 
-interface FiltersProps {
-  filters: Filter;
-  onFilterChange: ({ name, value }: FilterChangeEvent) => void;
-}
+  const { filters, onNameChange, onOrderByChange } = useFilters();
 
-const Filters: React.FC<FiltersProps> = ({ filters, onFilterChange }) => {
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    onFilterChange({ name, value });
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onNameChange(e.target.value);
   };
 
-  const { view, onViewChange } = useView();
+  const handleOrderByChange = (value: string) => {
+    onOrderByChange(value);
+  };
 
   return (
     <S.FiltersWrapper aria-label="Filter">
       <Input
+        value={filters.name}
         placeholder="Search"
         aria-label="name"
-        name="name"
-        onChange={handleInputChange}
+        onChange={handleNameChange}
       />
       <Button
-        active={filters.orderBy === "name"}
-        onClick={() => onFilterChange({ name: "orderBy", value: "name" })}
+        active={filters?.orderBy === "name"}
+        onClick={() => handleOrderByChange("name")}
       >
         Order by name
       </Button>
       <Button
         active={filters.orderBy === "created"}
-        onClick={() => onFilterChange({ name: "orderBy", value: "created" })}
+        onClick={() => handleOrderByChange("created")}
       >
         Order by creation
       </Button>

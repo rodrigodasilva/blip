@@ -1,22 +1,16 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 
 import Divider from "@/components/Divider";
 import Typography from "@/components/Typography";
 import { FavoritesProvider } from "@/hooks/useFavorites";
 import useFetch from "@/hooks/useFetch";
+import useFilters, { FiltersProvider } from "@/hooks/useFilters";
 import { ViewProvider } from "@/hooks/useView";
 
 import Chatbots from "./components/Chatbots";
 import Favorites from "./components/Favorites";
-import Filters, { FilterChangeEvent } from "./components/Filters";
+import Filters from "./components/Filters";
 import * as S from "./styles";
-
-export interface Filter {
-  orderBy: "name" | "created";
-  skip: number;
-  take: number;
-  name: string;
-}
 
 interface Bot {
   name: string;
@@ -25,25 +19,19 @@ interface Bot {
   created: string;
 }
 
+const SKIP = 0;
+const TAKE = 20;
+
 const ChabotList: React.FC = () => {
-  const [filters, setFilters] = useState<Filter>({
-    orderBy: "name",
-    skip: 0,
-    take: 20,
-    name: "",
-  });
+  const { filters } = useFilters();
 
   const {
     data: bots,
     loading,
     error,
   } = useFetch<Bot[]>(
-    `https://front-end-test.beta-cs.blip.ai/bots?Skip=${filters.skip}&Take=${filters.take}&Filters[orderBy]=${filters.orderBy}`
+    `https://front-end-test.beta-cs.blip.ai/bots?Skip=${SKIP}&Take=${TAKE}&Filters[orderBy]=${filters.orderBy}`
   );
-
-  const handleFilterChange = ({ name, value }: FilterChangeEvent) => {
-    setFilters(prevState => ({ ...prevState, [name]: value }));
-  };
 
   const filteredChatbots = useMemo(() => {
     if (!filters.name) return bots;
@@ -58,7 +46,7 @@ const ChabotList: React.FC = () => {
     <>
       <S.ChatbotListHeader>
         <Typography variant="h1-extra">My chatbots</Typography>
-        <Filters filters={filters} onFilterChange={handleFilterChange} />
+        <Filters />
       </S.ChatbotListHeader>
       <Favorites />
       <Divider className="my-40" />
@@ -68,11 +56,13 @@ const ChabotList: React.FC = () => {
 };
 
 const ChabotListWithProvides = () => (
-  <FavoritesProvider>
-    <ViewProvider>
-      <ChabotList />
-    </ViewProvider>
-  </FavoritesProvider>
+  <FiltersProvider>
+    <FavoritesProvider>
+      <ViewProvider>
+        <ChabotList />
+      </ViewProvider>
+    </FavoritesProvider>
+  </FiltersProvider>
 );
 
 export default ChabotListWithProvides;
